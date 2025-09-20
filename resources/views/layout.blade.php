@@ -30,6 +30,9 @@
                         <a class="nav-link active" aria-current="page" href="/article">Article</a>
                         </li>
                         <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/article/create">Create article</a>
+                        </li>
+                        <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/about">About</a>
                         </li>
                         <li class="nav-item">
