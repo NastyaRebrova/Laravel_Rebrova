@@ -20,7 +20,7 @@
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="/">Navbar</a>
+                    <a class="navbar-brand" href="/">Main</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -32,6 +32,9 @@
                         @can('create')
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/article/create">Create article</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/comment">Comment moderation</a>
                         </li>
                         @endcan
                         <li class="nav-item">
