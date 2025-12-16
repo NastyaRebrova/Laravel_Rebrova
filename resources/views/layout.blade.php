@@ -29,9 +29,11 @@
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/article">Article</a>
                         </li>
+                        @can('create')
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/article/create">Create article</a>
                         </li>
+                        @endcan
                         <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/about">About</a>
                         </li>
@@ -68,11 +70,6 @@
                 @yield('content')
             </div>
         </main>
-        <footer class="bg-light text-center fixed-bottom py-2 mt-auto">
-            <div class="container">
-                <p class="mb-0">Реброва Анастасия Алексеевна, 241-3210</p>
-            </div>
-        </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
