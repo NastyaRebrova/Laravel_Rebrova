@@ -16,6 +16,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::latest()->paginate(5);
+        foreach(auth()->user()->unreadNotifications as $notification) $notification->markAsRead();
         return view('/article/article', ['articles'=>$articles]);
     }
 
@@ -55,6 +56,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        if(isset($_GET['notify'])) auth()->user()->notifications->where('id', $_GET['notify'])->first()->markAsRead();
         $comments = Comment::where('article_id', $article->id)
                             ->where('accept', true)
                             ->get();
