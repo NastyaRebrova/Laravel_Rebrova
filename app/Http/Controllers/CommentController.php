@@ -70,10 +70,10 @@ class CommentController extends Controller
         $comment->accept = true;
         $article = Article::findOrFail($comment->article_id);
         $users = User::where('id', '!=', $comment->user_id)->get();
-        if ($comment->save()) {
+        if($comment->save()){
             Notification::send($users, new NewCommentNotify($article->title, $article->id));
-            Cache::forget('comments'.$article->id);
-        };
+            Cache::flush();
+        }
         return redirect()->route('comment.index');
     }
 
