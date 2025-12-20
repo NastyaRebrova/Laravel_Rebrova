@@ -45,18 +45,19 @@ class CommentController extends Controller
 
     public function edit(Comment $comment) {
         Gate::authorize('comment', $comment);
+        return response()->json($comment);
     }
 
-    public function update(Comment $comment) {
-        Gate::authorize('comment', $comment);
-        if($comment->save()){
-            Cache::flush();
-        }
-        return 0;
-    }
 
-    public function delete(Comment $comment) {
+    public function update(Request $request, Comment $comment) {
         Gate::authorize('comment', $comment);
+        
+        $request->validate([
+            'text' => 'min:10|required',
+        ]);
+        
+        $comment->text = $request->text;
+        
         if($comment->save()){
             Cache::forget('comments'.$comment->article_id);
             $keys = DB::table('cache')->whereRaw('`key` GLOB :key', [':key'=>'comments_*[0-9]'])->get();
@@ -64,7 +65,21 @@ class CommentController extends Controller
                 Cache::forget($param->key);
             }
         }
-        return 0;
+        return response('Comment updated successfully');
+    }
+
+    public function delete(Comment $comment) {
+        Gate::authorize('comment', $comment);
+        $article_id = $comment->article_id;
+        
+        if($comment->delete()){
+            Cache::forget('comments'.$article_id);
+            $keys = DB::table('cache')->whereRaw('`key` GLOB :key', [':key'=>'comments_*[0-9]'])->get();
+            foreach($keys as $param){
+                Cache::forget($param->key);
+            }
+        }
+        return response('Comment deleted successfully');
     }
 
     public function accept(Comment $comment) {

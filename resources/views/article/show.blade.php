@@ -45,8 +45,12 @@
             <p class="card-text">{{$comment->text}}</p>
             <div class="flex gap-4">
                 @can('comment', $comment)
-                <a href="/comment/edit/{{$comment->id}}" class="btn btn-warning">Edit comment</a>
-                <a href="/comment/delete/{{$comment->id}}" class="btn btn-danger">Delete comment</a>
+                <a href="{{ route('comment.edit', ['comment' => $comment->id]) }}" class="btn btn-warning">Edit comment</a>
+                <a href="{{ route('comment.destroy', ['comment' => $comment->id]) }}" 
+                class="btn btn-danger" 
+                onclick="return confirm('Are you sure you want to delete this comment?')">
+                Delete comment
+                </a>
                 @endcan
             </div>
         </div>

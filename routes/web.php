@@ -22,9 +22,9 @@ use App\Http\Controllers\CommentController;
 Route::controller(CommentController::class)->prefix('comment')->group(function() {
     Route::get('/', 'index')->name('comment.index');
     Route::post('/', 'store');
-    Route::get('/edit/{comment}', 'edit');
-    Route::post('/update/{comment}', 'update');
-    Route::get('/delete/{comment}', 'delete');
+    Route::get('/edit/{comment}', 'edit')->name('comment.edit');
+    Route::post('/update/{comment}', 'update')->name('comment.update');
+    Route::get('/delete/{comment}', 'destroy')->name('comment.destroy');
     Route::get('/accept/{comment}', 'accept');
     Route::get('/reject/{comment}', 'reject');
 });
